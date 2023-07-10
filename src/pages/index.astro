@@ -1,7 +1,11 @@
 ---
+import MainFlexible from "../components/MainFlexible.astro";
 import Layout from "../layouts/Layout.astro";
+import { getPageBySlug } from "../lib/api.js";
 
+const page = await getPageBySlug("accueil");
 ---
 
 <Layout title={"Accueil"}>
+    <MainFlexible page={page} />
 </Layout>
