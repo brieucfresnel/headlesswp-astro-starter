@@ -1,8 +1,20 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import MainFlexible from "../components/MainFlexible.astro"
+import Layout from "../layouts/Layout.astro"
+import { getPageBySlug, getAllPageSlugs } from "../lib/api"
 
-const title = Astro.params.slug;
+
+export async function getStaticPaths() {
+    let pages = await getAllPageSlugs()
+
+    return pages.map(page => ({params: {slug: page}}));
+}
+
+const title = Astro.params.slug
+
+const page = await getPageBySlug(Astro.params.slug)
 ---
 
 <Layout title={title}>
+    <MainFlexible page={page} />
 </Layout>
